@@ -4,17 +4,17 @@ eNet is an algorithm designed to integrate single-cell chromatin accessibility a
 
 ## Workflow
 ![image](https://user-images.githubusercontent.com/95668602/146138035-62e1ae61-7af4-4cab-9eab-0fcf8671eede.png)
-###Step1. Preparing input matrix (Input)
+### Step1. Preparing input matrix (Input)
 Two matrices are needed for the input of eNet. 1) scATAC-seq matrix (peak-cell); 2) scRNA-seq matrix (gene-cell).
-###Step2. Identifying the putative enhancer cluster (Node)
+### Step2. Identifying the putative enhancer cluster (Node)
 Node <- FindNode(dis=200000)
-###Step3. Identifying the predicted enhancer interactions (Edge)
+### Step3. Identifying the predicted enhancer interactions (Edge)
 Edge <- FindEdge()
-###Step4. Building enhancer networks (Network)
+### Step4. Building enhancer networks (Network)
 NetworkInfo <- BuildNetwork(cutoff=0.1)
-###Step5. Calculating network complexity (Network complexity)
+### Step5. Calculating network complexity (Network complexity)
 NetworkComplexity <- NetworkComlexity()
-###Step6. Classification of enhancer networks (Mode)
+### Step6. Classification of enhancer networks (Mode)
 NetworkMode <- NetworkMode(Dcutoff=1, Ncutoff=5)
 
 ## How to cite eNet
