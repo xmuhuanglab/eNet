@@ -3,7 +3,6 @@
 eNet is an algorithm designed to integrate single-cell chromatin accessibility and gene expression profiles and build enhancer networks, delineating how multiple enhancers interact with each other in gene regulation. 
 
 ## Workflow
-![image](https://user-images.githubusercontent.com/95668602/146138035-62e1ae61-7af4-4cab-9eab-0fcf8671eede.png)
 ### Step1. Preparing input matrix (Input)
 Two matrices are needed for the input of eNet. 1) scATAC-seq matrix (peak-cell); 2) scRNA-seq matrix (gene-cell).
 ### Step2. Identifying the putative enhancer cluster (Node)
