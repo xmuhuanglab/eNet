@@ -18,28 +18,36 @@ GPPair <- FindNode(cre.mat=cre.mat,
 )
 ```
 ### Step3. Identifying the predicted enhancer interactions (Edge)
+```r
 conns <- FindEdge(peaks.mat=cre.mat,  
                   GPPair=GPPair,
                   cellinfo=metadata, 
                   k=50, 
                   coords=dcluster_coords 
 )
+```
 ### Step4. Building enhancer networks (Network)
+```r
 NetworkList <- NetworkBuilding(conns=conns,
                                GPTab=GPTabFilt,
                                cutoff=0.1
 )
+```
 You can visualize the network by running the command: plot.igraph(NetworkList[[gene]])
 ### Step5. Calculating network complexity (Network complexity)
+```r
 Networkinfo <- NetComplexity(conns=conns,
                              GPTab=GPTabFilt,
                              cutoff=0.1 
 )
+```
 ### Step6. Classification of enhancer networks (Mode)
+```r
 Mode <- NetworkMode(Networkinfo=Networkinfo, 
                     SizeCutoff=5,
                     ConnectivityCutoff=1 
 )
+```
 
 ## How to cite eNet
 1. Danni Hong#, Hongli Lin#, Lifang Liu, Muya Shu, Jianwu Dai, Falong Lu, Jialiang Huang*. Complexity of enhancer networks predicts cell identity and disease genes. (Submitted)
