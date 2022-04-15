@@ -27,7 +27,8 @@ conns <- FindEdge(peaks.mat=cre.mat,
                   GPPair=GPPair,
                   cellinfo=metadata, 
                   k=50, 
-                  coords=dcluster_coords 
+                  coords=dcluster_coords,
+                  genome='hg19'
 )
 ```
 ### Step4. Building enhancer networks (Network)
