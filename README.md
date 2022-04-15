@@ -6,6 +6,7 @@ eNet is an algorithm designed to integrate single-cell chromatin accessibility a
 ### Step1. Preparing input matrix (Input)
 Two matrices are needed for the input of eNet. 1) scATAC-seq matrix (peak-cell); 2) scRNA-seq matrix (gene-cell).
 ### Step2. Identifying the putative enhancer cluster (Node)
+```r
 GPPair <- FindNode(cre.mat=cre.mat,  
                   exp.mat=rna.mat, 
                   normalizeRNAMat=T, 
@@ -15,6 +16,7 @@ GPPair <- FindNode(cre.mat=cre.mat,
                   estimate = 0, 
                   FDR = 0.05
 )
+```
 ### Step3. Identifying the predicted enhancer interactions (Edge)
 conns <- FindEdge(peaks.mat=cre.mat,  
                   GPPair=GPPair,
