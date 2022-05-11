@@ -60,7 +60,7 @@ Networkinfo <- NetComplexity(conns=conns,
 ```
 ### Step6. Classification of enhancer networks (Mode)
 ```r
-ode <- NetworkMode(Networkinfo=Networkinfo,  
+Mode <- NetworkMode(Networkinfo=Networkinfo,  
                     SizeCutoff=5, 
                     ConnectivityCutoff=1
 )
