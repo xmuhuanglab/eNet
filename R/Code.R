@@ -5,7 +5,6 @@ rm(list = ls())
 #------------Step 1. Preparing input data (Input)------------------
 ###################################################################
 # ------------------ This Step is to prepare input data
-.libPaths('/cluster/apps/R/R3.6.2/lib/R/library/')
 library(Signac)
 library(IRanges)
 library(Seurat)
