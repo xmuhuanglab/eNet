@@ -1,13 +1,9 @@
 # Tutorial for eNet
-### Step 1. 
+### Step 1. Preparing input data (Input)
 ```r
+# ------------------ This Step is to prepare input data
 setwd("workdir")
 rm(list = ls())
-
-###################################################################
-#------------Step 1. Preparing input data (Input)------------------
-###################################################################
-# ------------------ This Step is to prepare input data
 library(Signac)
 library(IRanges)
 library(Seurat)
@@ -25,10 +21,9 @@ load("../data/dcluster_coords.Rdata")
 load("../data/metadata.Rdata")
 source('./MainFunc.R')
 source('./utils.R')
-
-###################################################################
-#-----Step 2. Identifying the putative enhancer cluster (Node)-----
-###################################################################
+```
+### Step 2. Identifying the putative enhancer cluster (Node)
+```r
 # --- 2.1 calculate gene-peak correlation
 GPTab <- GPCor(cre.mat=cre.mat,  # peak-cell matrix
                exp.mat=rna.mat,  # scRNA-seq matrix or gene activity matrix
@@ -55,10 +50,9 @@ for(i in unique(GPTabFilt$Gene)){
   GPPair[[i]] <- as.character(tmp$Peak)
 }
 save(GPPair, file = 'GPPair.Rdata')
-
-###################################################################
-#--Step 3. Identifying the predicted enhancer interactions (Edge)--
-###################################################################
+```
+### Step 3. Identifying the predicted enhancer interactions (Edge)
+```r
 library(monocle3)
 library(Signac)
 library(Seurat)
@@ -71,10 +65,9 @@ conns <- FindEdge(peaks.mat=cre.mat,  # peak-cell matrix
                   genome='hg19' # reference genome, must be one of "hg19", "mm10", or "hg38"
 )
 save(conns, file = 'conns_GPPairPeaks.Rdata')
-
-###################################################################
-#----------Step 4. Building enhancer networks (Network)-----------
-###################################################################
+```
+### Step 4. Building enhancer networks (Network)
+```r
 library(igraph)
 library(dplyr)
 library(doParallel)
@@ -87,12 +80,9 @@ NetworkList <- BuildNetwork(conns=conns, # A data frame of co-accessibility scor
 save(NetworkList, file = "NetworkList.Rdata")
 # Visualize the enhancer network
 plot.igraph(NetworkList[["ESPN"]])
-
-
-
-###################################################################
-#-----Step 5.Calculating network complexity(Network complexity)----
-###################################################################
+```
+### Step 5.Calculating network complexity(Network complexity)
+```r
 # To determine the threshold value of co-accssibility score, we advice to choose the value around quantile 90%-95% using quantile(subset(conns, coaccess>0)$coaccess,seq(0,1,0.05),na.rm = T)
 Networkinfo <- NetComplexity(conns=conns,  # enhancer-enhancer co-accessibilty calculated using Cicero
                              GPTab=GPTabFilt,   # a list of enhancer cluster, also the output of Step.2
@@ -100,12 +90,9 @@ Networkinfo <- NetComplexity(conns=conns,  # enhancer-enhancer co-accessibilty c
                              nCores=8 # How many cores to use
 )
 save(Networkinfo, file = "Networkinfo.Rdata")
-
-
-                     
-###################################################################
-#--------Step 6. Classification of enhancer networks (Mode)--------
-###################################################################
+```
+### Step 6. Classification of enhancer networks (Mode)
+```r
 # To determine the threshold value of network size, namely SizeCutoff in the function NetworkMode, we advice to choose the median of network size for all genes.
 # To determine the threshold value of network connectivity, namely ConnectivityCutoff in the function NetworkMode, we advice to use value 1 to ensure that on average each enhancer has at least one interaction with other enhancer.
 Mode <- NetworkMode(Networkinfo=Networkinfo,  # Network information, the output file in Step.5
