@@ -3,67 +3,7 @@
 eNet is an algorithm designed to integrate single-cell chromatin accessibility and gene expression profiles and build enhancer networks, delineating how multiple enhancers interact with each other in gene regulation. 
 
 ## Workflow
-### Step1. Preparing input matrix (Input)
-Two matrices are needed for the input of eNet. 1) scATAC-seq matrix (peak-cell); 2) scRNA-seq matrix (gene-cell).
-```r
-load('./cre.mat.Rdata')
-load('./rna.mat.Rdata')
-```
-### Step2. Identifying the putative enhancer cluster (Node)
-```r
-GPTab <- GPCor(cre.mat=cre.mat,  
-               exp.mat=rna.mat,  
-               normalizeRNAMat=T, 
-               genome = "hg19", 
-               windowPadSize = 100000, 
-               proPadSize = 2000,
-               nCores=8
-)
-GPTabFilt <- FindNode(GPTab = GPTab, 
-                      genome = "hg19", 
-                      estimate = 0, 
-                      proPadSize = 2000, 
-                      FDR = 0.05 # 
-)
-GPPair <- list()
-for(i in unique(GPTabFilt$Gene)){
-  tmp <- subset(GPTabFilt, Gene == i)
-  GPPair[[i]] <- as.character(tmp$Peak)
-}
-```
-### Step3. Identifying the predicted enhancer interactions (Edge)
-```r
-conns <- FindEdge(peaks.mat=cre.mat, 
-                  GPPair=GPPair,
-                  cellinfo=metadata, 
-                  k=50, 
-                  coords=dcluster_coords, 
-                  genome='hg19' 
-)
-```
-### Step4. Building enhancer networks (Network)
-```r
-NetworkList <- BuildNetwork(conns=conns, 
-                            GPTab=GPTabFilt,  
-                            cutoff=0.1, 
-                            nCores=8 
-)
-```
-### Step5. Calculating network complexity (Network complexity)
-```r
-Networkinfo <- NetComplexity(conns=conns,  
-                             GPTab=GPTabFilt,   
-                             cutoff=0.1,
-                             nCores=8 
-)
-```
-### Step6. Classification of enhancer networks (Mode)
-```r
-Mode <- NetworkMode(Networkinfo=Networkinfo,  
-                    SizeCutoff=5, 
-                    ConnectivityCutoff=1
-)
-```
+![image](https://user-images.githubusercontent.com/95668602/167847847-21b4d8f6-f232-4edc-96e8-c3dd110882ba.png)
 See https://github.com/xmuhuanglab/eNet/blob/main/R/Code.R for more detailed tutorial.
 
 ## How to cite eNet
