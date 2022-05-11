@@ -11,47 +11,63 @@ load('./rna.mat.Rdata')
 ```
 ### Step2. Identifying the putative enhancer cluster (Node)
 ```r
-GPPair <- FindNode(cre.mat=cre.mat,  
-                  exp.mat=rna.mat, 
-                  normalizeRNAMat=T, 
-                  genome = "hg19", 
-                  windowPadSize = 100000, 
-                  proPadSize = 2000, 
-                  estimate = 0, 
-                  FDR = 0.05
+GPTab <- GPCor(cre.mat=cre.mat,  
+               exp.mat=rna.mat,  
+               normalizeRNAMat=T, 
+               genome = "hg19", 
+               windowPadSize = 100000, 
+               proPadSize = 2000 
 )
+GPTabFilt <- FindNode(GPTab = GPTab, 
+                      genome = "hg19", 
+                      estimate = 0, 
+                      proPadSize = 2000, 
+                      FDR = 0.05 # 
+)
+GPPair <- list()
+for(i in unique(GPTabFilt$Gene)){
+  tmp <- subset(GPTabFilt, Gene == i)
+  GPPair[[i]] <- as.character(tmp$Peak)
+}
 ```
 ### Step3. Identifying the predicted enhancer interactions (Edge)
 ```r
-conns <- FindEdge(peaks.mat=cre.mat,  
+conns <- FindEdge(peaks.mat=cre.mat, 
                   GPPair=GPPair,
                   cellinfo=metadata, 
                   k=50, 
-                  coords=dcluster_coords,
-                  genome='hg19'
+                  coords=dcluster_coords, 
+                  genome='hg19' 
 )
 ```
 ### Step4. Building enhancer networks (Network)
 ```r
-NetworkList <- NetworkBuilding(conns=conns,
-                               GPTab=GPTabFilt,
-                               cutoff=0.1
+NetworkList <- BuildNetwork(conns=conns, 
+                            GPTab=GPTabFilt,  
+                            cutoff=0.1, 
+                            nCores=8 
 )
+# Visualize the enhancer network
+plot.igraph(NetworkList[[gene]])
 ```
-You can visualize the network by running the command: plot.igraph(NetworkList[[gene]])
 ### Step5. Calculating network complexity (Network complexity)
 ```r
-Networkinfo <- NetComplexity(conns=conns,
-                             GPTab=GPTabFilt,
-                             cutoff=0.1 
+Networkinfo <- NetComplexity(conns=conns,  
+                             GPTab=GPTabFilt,   
+                             cutoff=0.1,
+                             nCores=8 
 )
 ```
 ### Step6. Classification of enhancer networks (Mode)
 ```r
-Mode <- NetworkMode(Networkinfo=Networkinfo, 
-                    SizeCutoff=5,
-                    ConnectivityCutoff=1 
+ode <- NetworkMode(Networkinfo=Networkinfo,  
+                    SizeCutoff=5, 
+                    ConnectivityCutoff=1
 )
+# Visualize the three modes of enhancer networks 
+library(ggplot2)
+ggplot(Mode, aes(x=NetworkSize, y=NetworkConnectivity, color=Mode), alpha=0.8) + geom_point() +
+  theme_classic() + xlab('log2(NetworkSize)') + ylab('Network connectivity')
 ```
 
 ## How to cite eNet
