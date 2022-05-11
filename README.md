@@ -16,7 +16,8 @@ GPTab <- GPCor(cre.mat=cre.mat,
                normalizeRNAMat=T, 
                genome = "hg19", 
                windowPadSize = 100000, 
-               proPadSize = 2000 
+               proPadSize = 2000,
+               nCores=8
 )
 GPTabFilt <- FindNode(GPTab = GPTab, 
                       genome = "hg19", 
