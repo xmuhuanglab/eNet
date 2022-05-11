@@ -1,7 +1,6 @@
 # Tutorial for eNet
 ### Step 1. Preparing input data (Input)
 ```r
-# ------------------ This Step is to prepare input data
 setwd("workdir")
 rm(list = ls())
 library(Signac)
