@@ -19,7 +19,7 @@ library(SummarizedExperiment)
 library(Matrix)
 
 # ---------- Load scRNA matrix and scATAC matrix
-load("../data/cre.mat.Rdata") # peak-cell matrix
+cre.mat <- readRDS("../data/cre.mat.Rds") # peak-cell matrix
 load("../data/rna.mat.Rdata") # scRNA matrix
 # Note that the scATAC-seq and scRNA-seq matrix must have the same columns.
 load("../data/dcluster_coords.Rdata") # UMAP coordinates
@@ -86,7 +86,7 @@ save(NetworkList, file = "NetworkList.Rdata")
 # Visualize the enhancer network
 plot.igraph(NetworkList[["ESPN"]])
 ```
-### Step 5.Calculating network complexity(Network complexity)
+### Step 5. Calculating network complexity(Network complexity)
 ```r
 # To determine the threshold value of co-accssibility score, we advice to choose the value around quantile 90%-95% using quantile(subset(conns, coaccess>0)$coaccess,seq(0,1,0.05),na.rm = T)
 Networkinfo <- NetComplexity(conns=conns,  # enhancer-enhancer co-accessibilty calculated using Cicero
