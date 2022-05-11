@@ -64,7 +64,7 @@ Mode <- NetworkMode(Networkinfo=Networkinfo,
                     ConnectivityCutoff=1
 )
 ```
-See https://github.com/xmuhuanglab/eNet/blob/main/R/Code.R for more detailed information.
+See https://github.com/xmuhuanglab/eNet/blob/main/R/Code.R for more detailed tutorial.
 
 ## How to cite eNet
 1. Danni Hong#, Hongli Lin#, Lifang Liu, Muya Shu, Jianwu Dai, Falong Lu, Jialiang Huang*. Complexity of enhancer networks predicts cell identity and disease genes. (Submitted)
