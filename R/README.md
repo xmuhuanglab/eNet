@@ -1,4 +1,10 @@
 # Tutorial for eNet
+Five input files are needed for eNet:
+ 1. scATAC-seq matrix;
+ 2. scRNA-seq matrix;
+ 3. UMAP coordinates; # A data frame with columns representing the coordinates of each cell in reduced dimension space
+ 4. Cell metadata; # A data frame containing attributes of individual cells
+ 5. Reference genome. # Obtained from https://github.com/buenrostrolab/stimATAC_analyses_code
 ### Step 1. Preparing input data (Input)
 ```r
 setwd("workdir")
@@ -16,8 +22,8 @@ library(Matrix)
 load("../data/cre.mat.Rdata") # peak-cell matrix
 load("../data/rna.mat.Rdata") # scRNA matrix
 # Note that the scATAC-seq and scRNA-seq matrix must have the same columns.
-load("../data/dcluster_coords.Rdata")
-load("../data/metadata.Rdata")
+load("../data/dcluster_coords.Rdata") # UMAP coordinates
+load("../data/metadata.Rdata") # Cell metadata
 source('./MainFunc.R')
 source('./utils.R')
 ```
