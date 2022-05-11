@@ -47,8 +47,6 @@ NetworkList <- BuildNetwork(conns=conns,
                             cutoff=0.1, 
                             nCores=8 
 )
-# Visualize the enhancer network
-plot.igraph(NetworkList[[gene]])
 ```
 ### Step5. Calculating network complexity (Network complexity)
 ```r
@@ -64,10 +62,6 @@ Mode <- NetworkMode(Networkinfo=Networkinfo,
                     SizeCutoff=5, 
                     ConnectivityCutoff=1
 )
-# Visualize the three modes of enhancer networks 
-library(ggplot2)
-ggplot(Mode, aes(x=NetworkSize, y=NetworkConnectivity, color=Mode), alpha=0.8) + geom_point() +
-  theme_classic() + xlab('log2(NetworkSize)') + ylab('Network connectivity')
 ```
 
 ## How to cite eNet
