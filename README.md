@@ -3,7 +3,7 @@
 eNet is an algorithm designed to integrate single-cell chromatin accessibility and gene expression profiles and build enhancer networks, delineating how multiple enhancers interact with each other in gene regulation. 
 
 ## Workflow
-![image](https://user-images.githubusercontent.com/95668602/167847847-21b4d8f6-f232-4edc-96e8-c3dd110882ba.png)
+![image](https://user-images.githubusercontent.com/95668602/168198245-f0fe872f-a1f7-4389-8abe-f50d6c94e7f4.png)
 See https://github.com/xmuhuanglab/eNet/blob/main/R/README.md for more detailed tutorial.
 
 ## How to cite eNet
