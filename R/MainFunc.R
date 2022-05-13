@@ -13,7 +13,7 @@ GPCor <- function(cre.mat=cre.mat,  # peak-cell matrix
   if(!genome %in% c("hg19", "hg38", "mm10")){
     stop("You must specify one of hg19, hg38 or mm10 as a genome build for currently supported TSS annotations..\n")
   }
-
+  
   # Normalize input matrix
   cre.mat.cc <- centerCounts(cre.mat)
   if(normalizeRNAMat==T)
@@ -221,19 +221,19 @@ NetComplexity <- function(conns=conns, # A data frame of co-accessibility scores
 }
 
 
-# ------------------ This step is to classify enhancer networks into three mode, including Network, Multiple and Simple based on network size and network connectivity
+# ------------------ This step is to classify enhancer networks into three mode, including Complex, Multiple and Simple based on network size and network connectivity
 ############## INPUT: 1. A data frame with 3 columns, including gene, NetworkSize, NetworkConnectivity
 ############## OUTPUT: A data frame with 4 columns, including gene, NetworkSize, NetworkConnectivity and Mode
 NetworkMode <- function(Networkinfo=Networkinfo,  # Networkinfo is the output file in Step.5
-                        SizeCutoff=5, # The threshold value of network size, which can be used to distinguish Simple and Network/Multiple mode
-                        ConnectivityCutoff=1 # The threshold value of network connectivity, which can be used to distinguish Network and Multiple mode
+                        SizeCutoff=5, # The threshold value of network size, which can be used to distinguish Simple and Complex/Multiple mode
+                        ConnectivityCutoff=1 # The threshold value of network connectivity, which can be used to distinguish Complex and Multiple mode
 ){
   Networkinfo$NetworkSize <- log2(Networkinfo$NetworkSize)
   Networkinfo$Mode <- NA
-  Networkinfo[which(Networkinfo$NetworkSize>log2(SizeCutoff) & Networkinfo$NetworkConnectivity>=ConnectivityCutoff),]$Mode <- 'Network'
+  Networkinfo[which(Networkinfo$NetworkSize>log2(SizeCutoff) & Networkinfo$NetworkConnectivity>=ConnectivityCutoff),]$Mode <- 'Complex'
   Networkinfo[which(Networkinfo$NetworkSize>log2(SizeCutoff) & Networkinfo$NetworkConnectivity<ConnectivityCutoff),]$Mode <- 'Multiple'
   Networkinfo[which(Networkinfo$NetworkSize<=log2(SizeCutoff)),]$Mode <- 'Simple'
-  Networkinfo$Mode <- factor(Networkinfo$Mode, levels = c('Network','Multiple','Simple'))
+  Networkinfo$Mode <- factor(Networkinfo$Mode, levels = c('Complex','Multiple','Simple'))
   
   Networkinfo <- Networkinfo[order(Networkinfo$NetworkConnectivity, decreasing = T),]
   Mode <- Networkinfo  
@@ -245,4 +245,3 @@ NetworkMode <- function(Networkinfo=Networkinfo,  # Networkinfo is the output fi
   # OUTPUT
   return(Mode)
 }
-
