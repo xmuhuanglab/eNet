@@ -4,7 +4,7 @@ Five input files are needed for eNet:
  2. scRNA-seq matrix;
  3. UMAP coordinates; # A data frame with columns representing the coordinates of each cell in reduced dimension space
  4. Cell metadata; # A data frame containing attributes of individual cells
- 5. Reference genome. # Obtained from https://github.com/buenrostrolab/stimATAC_analyses_code
+ 5. Reference genome. # Downloaded from https://github.com/buenrostrolab/stimATAC_analyses_code
 ### Step 1. Preparing input data (Input)
 ```r
 setwd("workdir")
