@@ -101,8 +101,8 @@ save(Networkinfo, file = "Networkinfo.Rdata")
 # To determine the threshold value of network size, namely SizeCutoff in the function NetworkMode, we advice to choose the median of network size for all genes.
 # To determine the threshold value of network connectivity, namely ConnectivityCutoff in the function NetworkMode, we advice to use value 1 to ensure that on average each enhancer has at least one interaction with other enhancer.
 Mode <- NetworkMode(Networkinfo=Networkinfo,  # Network information, the output file in Step.5
-                    SizeCutoff=5, # this parameter represents the threshold value of network size, which can be used to distinguish Simple and Network/Multiple mode
-                    ConnectivityCutoff=1 # this parameter represents the threshold value of network connectivity, which can be used to distinguish Network and Multiple mode
+                    SizeCutoff=5, # this parameter represents the threshold value of network size, which can be used to distinguish Simple and Complex/Multiple mode
+                    ConnectivityCutoff=1 # this parameter represents the threshold value of network connectivity, which can be used to distinguish Complex and Multiple mode
 )
 save(Mode, file = 'NetworkMode.Rdata')
 
