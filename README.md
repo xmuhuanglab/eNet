@@ -7,5 +7,5 @@ eNet is an algorithm designed to integrate single-cell chromatin accessibility a
 See https://github.com/xmuhuanglab/eNet/blob/main/R/README.md for more detailed tutorial.
 
 ## How to cite eNet
-1. Danni Hong#, Hongli Lin#, Lifang Liu, Muya Shu, Jianwu Dai, Falong Lu, Mengsha Tong, Jialiang Huang*. Complexity of enhancer networks predicts cell identity and disease genes revealed by single-cell multi-omics analysis. (Submitted)         Link to [our preprint](https://doi.org/10.1101/2022.05.20.492770).
-2. Muya Shu#, Danni Hong#, Hongli Lin, Jixiang Zhang, Zhengnan Luo, Yi Du, Zheng Sun, Man Yin, Yanyun Yin, Shilai Bao, Zhiyong Liu, Falong Lu*, Jialiang Huang*, Jianwu Dai*. Single-cell chromatin accessibility reveals enhancer networks driving spinal cord development. (Under review)
+1. Hong D, Lin H, Liu L, et al. Complexity of enhancer networks predicts cell identity and disease genes revealed by single-cell multi-omics analysis [published online ahead of print, 2022 Dec 3]. Brief Bioinform. 2022;bbac508. doi:10.1093/bib/bbac508
+2. Shu M, Hong D, Lin H, et al. Single-cell chromatin accessibility identifies enhancer networks driving gene expression during spinal cord development in mouse [published online ahead of print, 2022 Dec 2]. Dev Cell. 2022;S1534-5807(22)00811-5. doi:10.1016/j.devcel.2022.11.011
